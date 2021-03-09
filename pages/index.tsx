@@ -136,143 +136,21 @@ const IndexPage = () => {
           color: "#fff",
         }}
       >
-        <div
+        <Table
           id="elem1"
           ref={myRef}
+          tablename="users"
           className="p-2 w-auto text-black bg-blue-200 relative"
-        >
-          {/* top */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-0 right-1/2 -mt-1 -mr-1 anchors"
-            data-position="top"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* bottom */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto bottom-0 right-1/2 -mb-1 -mr-1 anchors"
-            data-position="bottom"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* left */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 left-0 -mt-1 -ml-1 anchors"
-            data-position="left"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* right */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 right-0 -mt-1 -mr-1 anchors"
-            data-position="right"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          <Table
-            id="test"
-            tablename="users"
-            callback={(name: string) => addTable(name)}
-          />
-        </div>
+          callback={(name: string) => addTable(name)}
+        />
 
-        <div id="elem2" className="p-2 w-auto text-black bg-blue-200 relative">
-          {/* top */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-0 right-1/2 -mt-1 -mr-1 anchors"
-            data-position="top"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* bottom */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto bottom-0 right-1/2 -mb-1 -mr-1 anchors"
-            data-position="bottom"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* left */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 left-0 -mt-1 -ml-1 anchors"
-            data-position="left"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* right */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 right-0 -mt-1 -mr-1 anchors"
-            data-position="right"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-
-          <Table
-            id="test"
-            tablename="cars"
-            callback={(name: string) => addTable(name)}
-          />
-        </div>
-
-        <div id="elem3" className="p-2 w-auto text-black bg-blue-200 relative">
-          {/* top */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-0 right-1/2 -mt-1 -mr-1 anchors"
-            data-position="top"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* bottom */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto bottom-0 right-1/2 -mb-1 -mr-1 anchors"
-            data-position="bottom"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* left */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 left-0 -mt-1 -ml-1 anchors"
-            data-position="left"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-          {/* right */}
-          <button
-            type="button"
-            className="flex absolute h-auto w-auto top-1/2 right-0 -mt-1 -mr-1 anchors"
-            data-position="right"
-          >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-          </button>
-
-          <Table
-            id="test"
-            tablename="cars"
-            callback={(name: string) => addTable(name)}
-          />
-        </div>
+        <Table
+          id="elem2"
+          ref={myRef}
+          tablename="cars"
+          className="p-2 w-auto text-black bg-blue-200 relative"
+          callback={(name: string) => addTable(name)}
+        />
 
         {pairsArray.map((item, key) => (
           <Xarrow
@@ -285,25 +163,25 @@ const IndexPage = () => {
           />
         ))}
 
-        <Xarrow
+        {/* <Xarrow
           start={myRef} //can be an id
           label={<div>One-to-Many</div>}
           startAnchor="right"
           endAnchor="left"
-          /* endAnchor={{
+          endAnchor={{
           position: "left",
           offset: {
             bottomness: 0,
             rightness: 0,
           },
-        }} */
+        }}
           end="elem2" //can be react ref
           dashness={{
             strokeLen: 10,
             nonStrokeLen: 2,
             animation: 1,
           }}
-        />
+        /> */}
       </div>
     </>
   );
