@@ -1,6 +1,7 @@
 import * as React from "react";
 import Xarrow from "react-xarrows";
 
+import { usePair } from "@/core/contexts/pairContext";
 import Table from "@/components/Table";
 
 type Link = {
@@ -22,19 +23,34 @@ type FieldType = {
 
 type Position = "left" | "right" | "top" | "bottom";
 
+type FieldsRelations = {
+  firstKeys: string[];
+  secondKeys: string[];
+};
+
+type Relation = {
+  tables: string[];
+  fields: FieldsRelations;
+  type: string;
+};
+
 const IndexPage = () => {
   const myRef = React.useRef<HTMLDivElement>(null);
-
-  const [pair, setPair] = React.useState<Partial<Link>>({
-    start: null,
-    startAnchor: null,
-  });
 
   const [tables, setTables] = React.useState<Partial<Table>[]>([]);
 
   const [linkType, setLinkType] = React.useState<string>("");
 
   const [pairsArray, setPairsArray] = React.useState<Link[]>([]);
+
+  const [relations, setRelations] = React.useState<Relation[]>([]);
+
+  const [anchor, dispatch] = usePair();
+
+  const [pair, setPair] = React.useState<Partial<Link>>({
+    start: null,
+    startAnchor: null,
+  });
 
   const addTable = (name: string, fields: FieldType[]) => {
     setTables([...tables, { name, fields }]);
@@ -64,39 +80,22 @@ const IndexPage = () => {
     }
   };
 
-  const linkTables = () => {
-    const anchorsNodes = document.getElementsByClassName("anchors");
-    const anchorsElements = Array.from(anchorsNodes);
-
-    anchorsElements.map((anchor) => {
-      anchor.addEventListener("click", () => {
-        const parent = anchor.parentElement;
-        const position = anchor.attributes.getNamedItem("data-position")
-          ?.value as Position;
-
-        // if we have the data
-        if (parent && position) {
-          updatePair(parent.id, position);
-        }
-      });
-    });
-  };
-
   React.useEffect(() => {
-    linkTables();
-  });
+    console.log(anchor.elementRef, anchor.position);
+    /* updatePair(anchor.id, anchor.position); */
+  }, [anchor]);
 
   React.useEffect(() => {
     console.log("pair:", pair);
   }, [pair]);
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     console.log("pairsArray:", pairsArray);
   }, [pairsArray]);
 
   React.useEffect(() => {
     console.log("tables:", tables);
-  }, [tables]);
+  }, [tables]); */
 
   return (
     <>

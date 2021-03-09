@@ -43,43 +43,6 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
 
   return (
     <div {...props}>
-      {/* anchors button top */}
-      <button
-        type="button"
-        className="flex absolute h-auto w-auto top-0 right-1/2 -mt-1 -mr-1 anchors"
-        data-position="top"
-      >
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-      </button>
-      {/* anchors button bottom */}
-      <button
-        type="button"
-        className="flex absolute h-auto w-auto bottom-0 right-1/2 -mb-1 -mr-1 anchors"
-        data-position="bottom"
-      >
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-      </button>
-      {/* anchors button left */}
-      <button
-        type="button"
-        className="flex absolute h-auto w-auto top-1/2 left-0 -mt-1 -ml-1 anchors"
-        data-position="left"
-      >
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-      </button>
-      {/* anchors button right */}
-      <button
-        type="button"
-        className="flex absolute h-auto w-auto top-1/2 right-0 -mt-1 -mr-1 anchors"
-        data-position="right"
-      >
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
-      </button>
-
       <div>
         {/* save button */}
         <div className="w-20 relative">
@@ -101,7 +64,7 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
           <button
             type="button"
             title="add field"
-            className="flex absolute h-auto w-auto bottom-0 right-0 -mr-1 focus:outline-none"
+            className="flex absolute h-auto w-auto bottom-0 right-0 -mr-1 focus:outline-none z-100"
             onClick={addField}
           >
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
