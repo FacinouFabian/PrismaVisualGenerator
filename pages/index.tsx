@@ -15,6 +15,11 @@ type Table = {
   fields: unknown[];
 };
 
+type FieldType = {
+  name: string;
+  type: string;
+};
+
 type Position = "left" | "right" | "top" | "bottom";
 
 const IndexPage = () => {
@@ -31,8 +36,8 @@ const IndexPage = () => {
 
   const [pairsArray, setPairsArray] = React.useState<Link[]>([]);
 
-  const addTable = (name: string) => {
-    setTables([...tables, { name }]);
+  const addTable = (name: string, fields: FieldType[]) => {
+    setTables([...tables, { name, fields }]);
   };
 
   const updatePair = (elementRef: string | null, position: Position | null) => {
@@ -141,7 +146,9 @@ const IndexPage = () => {
           ref={myRef}
           tablename="users"
           className="p-2 w-auto text-black bg-blue-200 relative"
-          callback={(name: string) => addTable(name)}
+          callback={(name: string, fields: FieldType[]) =>
+            addTable(name, fields)
+          }
         />
 
         <Table
@@ -149,7 +156,9 @@ const IndexPage = () => {
           ref={myRef}
           tablename="cars"
           className="p-2 w-auto text-black bg-blue-200 relative"
-          callback={(name: string) => addTable(name)}
+          callback={(name: string, fields: FieldType[]) =>
+            addTable(name, fields)
+          }
         />
 
         {pairsArray.map((item, key) => (
