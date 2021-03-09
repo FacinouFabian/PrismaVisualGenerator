@@ -1,8 +1,6 @@
 import * as React from "react";
 import Xarrow from "react-xarrows";
 
-import Table from "@/components/Table";
-
 const boxStyle = {
   border: "grey solid 2px",
   borderRadius: "10px",
@@ -26,9 +24,7 @@ const AboutPage = () => {
       <p id="elem2" style={boxStyle}>
         hey2
       </p>
-      <div className="bg-blue-200 p-2 w-auto text-black">
-        <Table />
-      </div>
+
       <Xarrow
         start={box1Ref} //can be react ref
         label={<div>test</div>}
