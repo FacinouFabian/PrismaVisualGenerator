@@ -162,26 +162,6 @@ const IndexPage = () => {
             end={item.end as string}
           />
         ))}
-
-        {/* <Xarrow
-          start={myRef} //can be an id
-          label={<div>One-to-Many</div>}
-          startAnchor="right"
-          endAnchor="left"
-          endAnchor={{
-          position: "left",
-          offset: {
-            bottomness: 0,
-            rightness: 0,
-          },
-        }}
-          end="elem2" //can be react ref
-          dashness={{
-            strokeLen: 10,
-            nonStrokeLen: 2,
-            animation: 1,
-          }}
-        /> */}
       </div>
     </>
   );

@@ -107,7 +107,7 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
               </tr>
             </thead>
             <tbody>
-              {fields.map((item, key) => (
+              {fields.map((_, key) => (
                 <Field
                   key={key}
                   callback={(data: any) => updateField(key, data)}
