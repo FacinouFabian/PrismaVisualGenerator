@@ -36,6 +36,25 @@ const AboutPage = () => {
           animation: 1,
         }}
       />
+      {/* <Xarrow
+        start={box1Ref} //can be react ref
+        label={<div>One-to-Many</div>}
+        startAnchor="right"
+        end="elem2" //or an id
+        endAnchor={{
+          position: "left",
+          offset: {
+            bottomness: 0,
+            rightness: 0,
+          },
+        }}
+        headColor="#fff"
+        dashness={{
+          strokeLen: 10,
+          nonStrokeLen: 2,
+          animation: 1,
+        }}
+      /> */}
     </div>
   );
 };
