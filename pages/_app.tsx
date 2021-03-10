@@ -1,7 +1,7 @@
 import React from "react";
+
 import "@/layouts/styles/tailwind.css";
 import "@/layouts/styles/index.css";
-
 import Pair, { PairProvider } from "@/core/contexts/pairContext";
 
 type Props = {
@@ -21,11 +21,11 @@ type Props = {
  */
 const MyApp = ({ Component, pageProps }: Props): JSX.Element => {
   return (
-    <React.StrictMode>
-      <PairProvider {...Pair}>
+    <PairProvider {...Pair}>
+      <React.StrictMode>
         <Component {...pageProps} />
-      </PairProvider>
-    </React.StrictMode>
+      </React.StrictMode>
+    </PairProvider>
   );
 };
 

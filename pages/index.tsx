@@ -11,9 +11,9 @@ type Link = {
   endAnchor: "left" | "right" | "top" | "bottom" | null;
 };
 
-type Table = {
+type TableType = {
   name: string;
-  fields: unknown[];
+  fields: FieldType[];
 };
 
 type FieldType = {
@@ -35,35 +35,33 @@ type Relation = {
 };
 
 const IndexPage = () => {
-  const myRef = React.useRef<HTMLDivElement>(null);
-
-  const [tables, setTables] = React.useState<Partial<Table>[]>([]);
-
   const [linkType, setLinkType] = React.useState<string>("");
 
   const [pairsArray, setPairsArray] = React.useState<Link[]>([]);
 
+  const [pairIsWaiting, setPairIsWaiting] = React.useState<boolean>(false);
+
+  const [hiddeSaveMenu, setHiddeSaveMenu] = React.useState<boolean>(true);
+
   const [relations, setRelations] = React.useState<Relation[]>([]);
 
-  const [anchor, dispatch] = usePair();
+  const [context, dispatch] = usePair();
 
   const [pair, setPair] = React.useState<Partial<Link>>({
     start: null,
     startAnchor: null,
   });
 
-  const addTable = (name: string, fields: FieldType[]) => {
-    setTables([...tables, { name, fields }]);
-  };
-
   const updatePair = (elementRef: string | null, position: Position | null) => {
-    if (pair.start == null) {
+    if (!pairIsWaiting) {
       setPair({
         start: elementRef,
         startAnchor: position,
       });
+      setPairIsWaiting(!pairIsWaiting);
     } else {
-      setPairsArray([
+      console.log("yo");
+      /* setPairsArray([
         ...pairsArray,
         {
           start: pair.start,
@@ -76,26 +74,38 @@ const IndexPage = () => {
       setPair({
         start: null,
         startAnchor: null,
-      });
+      }); */
     }
   };
 
-  React.useEffect(() => {
-    console.log(anchor.elementRef, anchor.position);
-    /* updatePair(anchor.id, anchor.position); */
-  }, [anchor]);
+  const addTable = () => {
+    dispatch({
+      type: "UPDATE_TABLES",
+      payload: { tables: [...context.tables, { name: "", fields: [] }] },
+    });
+  };
+
+  const createFile = () => {
+    const file = new Blob(
+      [JSON.stringify({ name, tables: context.tables }, null, 2)],
+      {
+        type: "application/json",
+      }
+    );
+
+    const link = document.getElementById("download_link") as HTMLLinkElement;
+
+    window.URL.revokeObjectURL(link.href);
+
+    const objectURL = URL.createObjectURL(file);
+
+    link.href = objectURL;
+  };
 
   React.useEffect(() => {
-    console.log("pair:", pair);
-  }, [pair]);
-
-  /* React.useEffect(() => {
-    console.log("pairsArray:", pairsArray);
-  }, [pairsArray]);
-
-  React.useEffect(() => {
-    console.log("tables:", tables);
-  }, [tables]); */
+    console.log(context.tables);
+    /* updatePair(anchor.elementRef, anchor.position); */
+  }, [context]);
 
   return (
     <>
@@ -140,25 +150,14 @@ const IndexPage = () => {
           color: "#fff",
         }}
       >
-        <Table
-          id="elem1"
-          ref={myRef}
-          tablename="users"
-          className="p-2 w-auto text-black bg-blue-200 relative"
-          callback={(name: string, fields: FieldType[]) =>
-            addTable(name, fields)
-          }
-        />
-
-        <Table
-          id="elem2"
-          ref={myRef}
-          tablename="cars"
-          className="p-2 w-auto text-black bg-blue-200 relative"
-          callback={(name: string, fields: FieldType[]) =>
-            addTable(name, fields)
-          }
-        />
+        {context.tables.map((table: TableType, index: number) => (
+          <Table
+            key={index}
+            id={table.name}
+            tablename={table.name}
+            className="p-2 w-auto text-gray-800 relative"
+          />
+        ))}
 
         {pairsArray.map((item, key) => (
           <Xarrow
@@ -170,6 +169,97 @@ const IndexPage = () => {
             end={item.end as string}
           />
         ))}
+      </div>
+
+      <div className="w-72 absolute bottom-5 right-5 flex flex-col items-start bg-white shadow rounded-md py-5 pl-6 pr-8 sm:pr-6">
+        {/* index */}
+        <div className="flex items-center justify-start space-x-5">
+          {/* save button */}
+          <span className="relative z-0 inline-flex shadow-sm rounded-md">
+            <button
+              type="button"
+              onClick={() => createFile()}
+              className="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              Save changes
+            </button>
+            {/* menu */}
+            <span className="-ml-px relative block">
+              <div
+                hidden={hiddeSaveMenu}
+                className="origin-top-right absolute bottom-10 right-0 mt-2 -mr-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="option-menu"
+              >
+                <div className="py-1" role="none">
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                  >
+                    Save and deploy
+                  </a>
+
+                  <a
+                    id="download_link"
+                    download="schema.json"
+                    href=""
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                  >
+                    Export schema
+                  </a>
+                </div>
+              </div>
+              {/* open/close menu button */}
+              <button
+                type="button"
+                onClick={() => setHiddeSaveMenu(!hiddeSaveMenu)}
+                className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                id="option-menu"
+                aria-expanded="true"
+                aria-haspopup="true"
+              >
+                <svg
+                  className="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </span>
+          </span>
+          {/* add table button */}
+          <button
+            type="button"
+            onClick={addTable}
+            className="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <svg
+              className="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </>
   );

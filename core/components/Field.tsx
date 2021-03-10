@@ -47,7 +47,7 @@ const Field: React.FunctionComponent<Props> = ({ callback }): JSX.Element => {
 
   return (
     <>
-      <tr className="hover:bg-grey-lighter">
+      <tr className="hover:bg-grey-lighter field">
         {/* field */}
         <td className="py-4 px-6 border-b border-grey-light relative">
           {/* anchors button left */}
@@ -57,8 +57,8 @@ const Field: React.FunctionComponent<Props> = ({ callback }): JSX.Element => {
             className="flex absolute h-auto w-auto top-1/2 left-0 -mt-1 -ml-1 anchors"
             data-position="left"
           >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-yellow-500"></span>
           </button>
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -76,8 +76,8 @@ const Field: React.FunctionComponent<Props> = ({ callback }): JSX.Element => {
             className="flex absolute h-auto w-auto top-1/2 right-0 -mt-1 -mr-1 anchors"
             data-position="right"
           >
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-green-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+            <span className="relative inline-flex items-center rounded-full h-2 w-2 bg-yellow-500"></span>
           </button>
         </td>
       </tr>

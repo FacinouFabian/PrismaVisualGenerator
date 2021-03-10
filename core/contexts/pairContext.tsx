@@ -2,14 +2,20 @@ import * as React from "react";
 
 type Position = "left" | "right" | "top" | "bottom";
 
+type Table = {
+  name: string;
+  fields: unknown[];
+};
+
 type State = {
   elementRef: string | null | undefined;
   position: Position | null | undefined;
+  tables: Partial<Table>[] | undefined;
 };
 
 // All user action
 type Action = {
-  type: "UPDATE_PAIR";
+  type: "UPDATE_PAIR" | "UPDATE_TABLES";
   payload?: Partial<State>;
 };
 
@@ -55,6 +61,7 @@ export default {
   initialState: {
     elementRef: undefined,
     position: undefined,
+    tables: [],
   },
   /**
    * @description designing the user state shape
@@ -68,6 +75,11 @@ export default {
           ...state,
           elementRef: action?.payload?.elementRef,
           position: action?.payload?.position,
+        };
+      case "UPDATE_TABLES":
+        return {
+          ...state,
+          tables: action?.payload?.tables,
         };
       default:
         return state;
