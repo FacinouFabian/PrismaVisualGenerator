@@ -3,6 +3,7 @@ import React from "react";
 import "@/layouts/styles/tailwind.css";
 import "@/layouts/styles/index.css";
 import Pair, { PairProvider } from "@/core/contexts/pairContext";
+import Table, { TableProvider } from "@/core/contexts/tableContext";
 
 type Props = {
   // the active page
@@ -21,11 +22,13 @@ type Props = {
  */
 const MyApp = ({ Component, pageProps }: Props): JSX.Element => {
   return (
-    <PairProvider {...Pair}>
-      <React.StrictMode>
-        <Component {...pageProps} />
-      </React.StrictMode>
-    </PairProvider>
+    <TableProvider {...Table}>
+      <PairProvider {...Pair}>
+        <React.StrictMode>
+          <Component {...pageProps} />
+        </React.StrictMode>
+      </PairProvider>
+    </TableProvider>
   );
 };
 

@@ -8,6 +8,17 @@ const Attributes: React.FunctionComponent<Props> = ({
   callback,
 }): JSX.Element => {
   const [menuHidden, setMenuHidden] = React.useState(true);
+  const [type, setType] = React.useState("");
+
+  const selectType = (type: string) => {
+    setType(type);
+    setMenuHidden(true);
+
+    if (type != "") {
+      callback(type);
+    }
+  };
+
   return (
     <div>
       <div className="mt-1 relative">
@@ -19,7 +30,9 @@ const Attributes: React.FunctionComponent<Props> = ({
           aria-labelledby="listbox-label"
           className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
-          <span className="block truncate">String</span>
+          <span className="block truncate">
+            {type === "" ? "Select..." : type}
+          </span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             {/* <!-- Heroicon name: solid/selector --> */}
             <svg
@@ -52,12 +65,16 @@ const Attributes: React.FunctionComponent<Props> = ({
             <li
               id="listbox-option-0"
               role="option"
-              className="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9"
-              onClick={() => callback("string")}
+              className="text-gray-900 hover:bg-gray-700 cursor-pointer select-none relative py-2 pl-3 pr-9"
+              onClick={() => selectType("string")}
             >
               <span className="font-normal block truncate">String</span>
 
-              <span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
+              <span
+                className={`${
+                  type != "string" && "hidden"
+                } text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4`}
+              >
                 <svg
                   className="h-5 w-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,12 +93,17 @@ const Attributes: React.FunctionComponent<Props> = ({
             <li
               id="listbox-option-1"
               role="option"
-              className="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9"
-              onClick={() => callback("int")}
+              className="text-gray-900 hover:bg-gray-700 cursor-pointer select-none relative py-2 pl-3 pr-9"
+              onClick={() => selectType("int")}
             >
               <span className="font-normal block truncate">Int</span>
 
-              <span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
+              <span
+                hidden={type != "int"}
+                className={`${
+                  type != "int" && "hidden"
+                } text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4`}
+              >
                 <svg
                   className="h-5 w-5"
                   xmlns="http://www.w3.org/2000/svg"

@@ -27,7 +27,7 @@ const Field: React.FunctionComponent<Props> = ({ callback }): JSX.Element => {
         // if we have the data
         if (position) {
           dispatch({
-            type: "UPDATE_PAIR",
+            type: "ANCHOR_SELECTED",
             payload: { elementRef: anchor.id, position },
           });
         }
@@ -37,13 +37,10 @@ const Field: React.FunctionComponent<Props> = ({ callback }): JSX.Element => {
 
   React.useEffect(() => {
     if (name != "" && type != "") {
+      addAnchorsListener();
       callback({ name, type });
     }
   }, [name, type]);
-
-  React.useEffect(() => {
-    addAnchorsListener();
-  }, [name]);
 
   return (
     <>

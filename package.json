@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@cybertec/react-database-diagram": "^0.1.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.4.2",
     "@types/react-rnd": "^8.0.0",
     "next": "latest",
     "next-images": "^1.6.2",
@@ -21,7 +24,7 @@
     "react-draggable": "^4.4.3",
     "react-icons": "^4.2.0",
     "react-rnd": "^10.2.4",
-    "react-xarrows": "^1.5.2",
+    "react-xarrows": "^2.0.2",
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {

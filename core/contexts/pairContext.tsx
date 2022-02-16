@@ -2,20 +2,24 @@ import * as React from "react";
 
 type Position = "left" | "right" | "top" | "bottom";
 
-type Table = {
-  name: string;
-  fields: unknown[];
+type Anchor = {
+  elementRef: string;
+  position: string;
+};
+
+type Pair = {
+  anchor1: Anchor;
+  anchor2: Anchor;
 };
 
 type State = {
-  elementRef: string | null | undefined;
-  position: Position | null | undefined;
-  tables: Partial<Table>[] | undefined;
+  anchorSelected: Anchor | undefined;
+  pairs: Pair[] | undefined;
 };
 
 // All user action
 type Action = {
-  type: "UPDATE_PAIR" | "UPDATE_TABLES";
+  type: "UPDATE_PAIR" | "ANCHOR_SELECTED";
   payload?: Partial<State>;
 };
 
@@ -59,9 +63,8 @@ export const usePair = (): any => React.useContext(PairContext);
 
 export default {
   initialState: {
-    elementRef: undefined,
-    position: undefined,
-    tables: [],
+    pairs: [],
+    anchorSelected: undefined,
   },
   /**
    * @description designing the user state shape
@@ -73,13 +76,12 @@ export default {
       case "UPDATE_PAIR":
         return {
           ...state,
-          elementRef: action?.payload?.elementRef,
-          position: action?.payload?.position,
+          pairs: action?.payload?.pairs,
         };
-      case "UPDATE_TABLES":
+      case "ANCHOR_SELECTED":
         return {
           ...state,
-          tables: action?.payload?.tables,
+          anchorSelected: action?.payload?.anchorSelected,
         };
       default:
         return state;

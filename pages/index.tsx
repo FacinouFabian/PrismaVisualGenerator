@@ -2,7 +2,9 @@ import * as React from "react";
 import Xarrow from "react-xarrows";
 
 import { usePair } from "@/core/contexts/pairContext";
+import { useTable } from "@/core/contexts/tableContext";
 import Table from "@/components/Table";
+import Dialog from "@/components/Dialog";
 
 type Link = {
   start: string | null;
@@ -37,15 +39,14 @@ type Relation = {
 const IndexPage = () => {
   const [linkType, setLinkType] = React.useState<string>("");
 
-  const [pairsArray, setPairsArray] = React.useState<Link[]>([]);
-
   const [pairIsWaiting, setPairIsWaiting] = React.useState<boolean>(false);
 
   const [hiddeSaveMenu, setHiddeSaveMenu] = React.useState<boolean>(true);
 
-  const [relations, setRelations] = React.useState<Relation[]>([]);
+  // const [relations, setRelations] = React.useState<Relation[]>([]);
+  const [pairsArray] = React.useState<Link[]>([]);
 
-  const [context, dispatch] = usePair();
+  const [tableContext, dispatchTables] = useTable();
 
   const [pair, setPair] = React.useState<Partial<Link>>({
     start: null,
@@ -78,16 +79,16 @@ const IndexPage = () => {
     }
   };
 
-  const addTable = () => {
-    dispatch({
+  const addTable = (name: string) => {
+    dispatchTables({
       type: "UPDATE_TABLES",
-      payload: { tables: [...context.tables, { name: "", fields: [] }] },
+      payload: { tables: [...tableContext.tables, { name, fields: [] }] },
     });
   };
 
   const createFile = () => {
     const file = new Blob(
-      [JSON.stringify({ name, tables: context.tables }, null, 2)],
+      [JSON.stringify({ name, tables: tableContext.tables }, null, 2)],
       {
         type: "application/json",
       }
@@ -101,11 +102,6 @@ const IndexPage = () => {
 
     link.href = objectURL;
   };
-
-  React.useEffect(() => {
-    console.log(context.tables);
-    /* updatePair(anchor.elementRef, anchor.position); */
-  }, [context]);
 
   return (
     <>
@@ -150,7 +146,7 @@ const IndexPage = () => {
           color: "#fff",
         }}
       >
-        {context.tables.map((table: TableType, index: number) => (
+        {tableContext.tables.map((table: TableType, index: number) => (
           <Table
             key={index}
             id={table.name}
@@ -163,7 +159,7 @@ const IndexPage = () => {
           <Xarrow
             key={key}
             start={item.start as string}
-            label={<div className="bg-black">{linkType}</div>}
+            /* label={<div className="bg-black">{linkType}</div>} */
             startAnchor={item.startAnchor as Position}
             endAnchor={item.endAnchor as Position}
             end={item.end as string}
@@ -238,27 +234,7 @@ const IndexPage = () => {
             </span>
           </span>
           {/* add table button */}
-          <button
-            type="button"
-            onClick={addTable}
-            className="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <svg
-              className="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-          </button>
+          <Dialog onValidate={addTable} />
         </div>
       </div>
     </>

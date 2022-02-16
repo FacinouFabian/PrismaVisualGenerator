@@ -20,7 +20,6 @@ type Table = {
 };
 
 const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const [name, setName] = React.useState<string>("");
   const [fields, setFields] = React.useState<FieldType[]>([]);
 
   const [context, dispatch] = usePair();
@@ -28,7 +27,7 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
   const saveTable = () => {
     console.log("ok");
     const tables = context.tables;
-    const result = tables.find((table: Table) => table.name == name);
+    const result = tables.find((table: Table) => table.name == props.tablename);
 
     if (result) {
       result.name = name;
@@ -52,7 +51,7 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
     setFields([...fields, { name: "", type: "" }]);
   };
 
-  const updateField = (index: number, data: Partial<FieldType>) => {
+  const updateField = (index: number, data: FieldType) => {
     const fieldSave = fields;
 
     fieldSave[index].name = data.name as string;
@@ -61,24 +60,15 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
     setFields(fieldSave);
   };
 
-  React.useEffect(() => {
-    setName(props.tablename);
-  }, []);
-
   return (
     <Rnd>
       <div {...props} className={`${props.className} field`}>
         <div>
           {/* save button */}
           <div className="w-20 relative flex">
-            <input
-              placeholder="Enter table name..."
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setName(e.target.value)
-              }
-              value={name}
-              className="w-40 h-10 p-2 font-semibold text-md border placeholder-gray-800 border-gray-700 bg-transparent italic focus:outline-none rounded-t-sm"
-            />
+            <span className="w-40 h-10 p-2 font-semibold text-md bg-transparent italic rounded-t-sm">
+              {props.tablename}
+            </span>
             <button
               type="button"
               title="save table"
