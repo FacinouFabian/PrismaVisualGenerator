@@ -37,8 +37,6 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
         type: "UPDATE_TABLES",
         payload: { tables: [...context.tables, { name: "", fields: [] }] },
       });
-
-      console.log(context.tables);
     } else {
       dispatch({
         type: "UPDATE_TABLES",
@@ -59,6 +57,10 @@ const Table: React.FunctionComponent<Props> = (props): JSX.Element => {
 
     setFields(fieldSave);
   };
+
+  React.useEffect(() => {
+    console.log(context.relations);
+  }, [context.relations]);
 
   return (
     <Rnd>

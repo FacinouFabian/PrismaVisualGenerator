@@ -1,7 +1,11 @@
 import * as React from "react";
 
-type Position = "left" | "right" | "top" | "bottom";
-
+type Relation = {
+  targetId: string;
+  targetAnchor: string;
+  sourceAnchor: string;
+  style: any;
+};
 type Anchor = {
   elementRef: string;
   position: string;
@@ -14,12 +18,13 @@ type Pair = {
 
 type State = {
   anchorSelected: Anchor | undefined;
+  relations: Relation[] | undefined;
   pairs: Pair[] | undefined;
 };
 
 // All user action
 type Action = {
-  type: "UPDATE_PAIR" | "ANCHOR_SELECTED";
+  type: "UPDATE_PAIR" | "ANCHOR_SELECTED" | "UPDATE_RELATIONS";
   payload?: Partial<State>;
 };
 
@@ -65,6 +70,7 @@ export default {
   initialState: {
     pairs: [],
     anchorSelected: undefined,
+    relations: [],
   },
   /**
    * @description designing the user state shape
@@ -82,6 +88,11 @@ export default {
         return {
           ...state,
           anchorSelected: action?.payload?.anchorSelected,
+        };
+      case "UPDATE_RELATIONS":
+        return {
+          ...state,
+          relations: action?.payload?.relations,
         };
       default:
         return state;

@@ -3098,10 +3098,10 @@ re-resizable@6.9.0:
   dependencies:
     fast-memoize "^2.5.1"
 
-react-archer@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-archer/-/react-archer-3.0.0.tgz#41c92f3eae80d7e3b1aa2ce66113c46241ac6ced"
-  integrity sha512-+Uc6VyljE+nTWVproEELn1Tlv7MowXMNK7BAc4loji2+U3nTcw3neaAm8xnsNyYxByDjmsjxBR/6Z7/lfBHVig==
+react-archer@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-archer/-/react-archer-3.3.0.tgz#09473de3dcfad80f2c2b4537f0060963e20c5f1a"
+  integrity sha512-A1B1fX2USpaZd7W3JI3FKsoUfQ6Eed7opQej+WuYKwKTwfnbUYsfz3aAuESksfFGfLq2zYOi7Zz6SDr+F6X1kQ==
   dependencies:
     react-fast-compare "^2.0.4"
     resize-observer-polyfill "1.5.0"

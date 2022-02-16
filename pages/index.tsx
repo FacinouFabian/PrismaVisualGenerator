@@ -1,6 +1,5 @@
 import * as React from "react";
-import Xarrow from "react-xarrows";
-
+import { ArcherContainer } from "react-archer";
 import { usePair } from "@/core/contexts/pairContext";
 import { useTable } from "@/core/contexts/tableContext";
 import Table from "@/components/Table";
@@ -146,25 +145,16 @@ const IndexPage = () => {
           color: "#fff",
         }}
       >
-        {tableContext.tables.map((table: TableType, index: number) => (
-          <Table
-            key={index}
-            id={table.name}
-            tablename={table.name}
-            className="p-2 w-auto text-gray-800 relative"
-          />
-        ))}
-
-        {pairsArray.map((item, key) => (
-          <Xarrow
-            key={key}
-            start={item.start as string}
-            /* label={<div className="bg-black">{linkType}</div>} */
-            startAnchor={item.startAnchor as Position}
-            endAnchor={item.endAnchor as Position}
-            end={item.end as string}
-          />
-        ))}
+        <ArcherContainer strokeColor="red">
+          {tableContext.tables.map((table: TableType, index: number) => (
+            <Table
+              key={index}
+              id={table.name}
+              tablename={table.name}
+              className="p-2 w-full text-gray-800 relative"
+            />
+          ))}
+        </ArcherContainer>
       </div>
 
       <div className="w-72 absolute bottom-5 right-5 flex flex-col items-start bg-white shadow rounded-md py-5 pl-6 pr-8 sm:pr-6">
@@ -191,7 +181,7 @@ const IndexPage = () => {
                 <div className="py-1" role="none">
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 bg-"
                     role="menuitem"
                   >
                     Save and deploy
